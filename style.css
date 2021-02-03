@@ -2,7 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 body {
     font-family: 'Yusei Magic', sans-serif;
+    margin-bottom: 0;
 }
+
+
+/*** header ***/
 
 header h1 {
     display: inline-block;
@@ -26,6 +30,9 @@ header label {
     text-align: right;
     margin-right: 5%;
 }
+
+
+/*** table ***/
 
 table {
     margin: auto;
@@ -92,4 +99,21 @@ td.cross {
 td.block {
     background-color: black;
     border-color: black;
+}
+
+
+/*** controls ***/
+
+#controls {
+    display: block;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 0;
+    padding: 2%;
+    background-color: white;
+    border: 1px solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
