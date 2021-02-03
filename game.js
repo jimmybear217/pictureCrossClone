@@ -8,6 +8,7 @@
 function initBoard(size = 15) {
     var container = document.getElementById("page");
     var table = document.createElement("table");
+    table.id = "game-table"
     for (y = -1; y < size; y++) {
         var tr = document.createElement("tr");
         // columns
@@ -39,8 +40,8 @@ function initBoard(size = 15) {
                 td.setAttribute("data-Y", y);
                 td.id = "cell-X" + x + "Y" + y;
                 tr.appendChild(td);
-                td.addEventListener("click", cellClickHandler);
-                td.addEventListener("contextmenu", cellRightClickHandler);
+                td.addEventListener("click", doNothing)
+                td.addEventListener("contextMenu", doNothing)
                 td.addEventListener("statusUpdate", cellStatusUpdateHandler);
             }
         }
@@ -50,36 +51,35 @@ function initBoard(size = 15) {
     container.setAttribute("tableSize", size);
 }
 
-function cellClickHandler(ev) {
-    console.log(ev);
-    var target = ev.target;
+function doNothing(ev) {
     ev.preventDefault();
-    if (target.classList.contains("block")) {
-        target.classList.remove("block");
-    } else if (target.classList.contains("cross")) {
-        target.classList.remove("cross");
-    } else {
-        target.classList.add("block");
-    }
-    target.dispatchEvent(new Event("statusUpdate"));
+    console.log(ev)
 }
 
-function cellRightClickHandler(ev) {
-    console.log(ev);
-    var target = ev.target;
-    ev.preventDefault();
-    if (target.classList.contains("block")) {
-        target.classList.remove("block");
-    } else if (target.classList.contains("cross")) {
-        target.classList.remove("cross");
-    } else {
+
+function setBlock(target) {
+    if (!target.classList.contains("block") && !target.classList.contains("cross")) {
+        target.classList.add("block");
+    }
+}
+
+function setCross(target) {
+    if (!target.classList.contains("cross") && !target.classList.contains("block")) {
         target.classList.add("cross");
     }
-    target.dispatchEvent(new Event("statusUpdate"));
+}
+
+function setBlank(target) {
+    if (target.classList.contains("block")) {
+        target.classList.remove("block");
+    }
+    if (target.classList.contains("cross")) {
+        target.classList.remove("cross");
+    }
 }
 
 function cellStatusUpdateHandler(ev) {
-    console.log("The status has changed.");
+    // console.log("The status has changed.");
     target = ev.target;
     ev.preventDefault();
     var x = target.getAttribute("data-X");
